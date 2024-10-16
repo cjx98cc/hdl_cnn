@@ -1,0 +1,2 @@
+Time resolution is 1 ps
+$stop called at time : 3000015 ns : File "/home/cc/Documents/GitHub/xilinx_space/bufgmux/tb/testbench_top.v" Line 44

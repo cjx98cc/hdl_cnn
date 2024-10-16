@@ -1,0 +1,19 @@
+Vivado Simulator v2022.2
+Copyright 1986-1999, 2001-2022 Xilinx, Inc. All Rights Reserved.
+Running: /home/cc/WinSD/Xilinx/Vivado/2022.2/bin/unwrapped/lnx64.o/xelab --incr --debug typical --relax --mt 8 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot testbench_top_behav xil_defaultlib.testbench_top xil_defaultlib.glbl -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/home/cc/Documents/GitHub/xilinx_space/bufgmux/src/vlg_design.v" Line 1. Module vlg_design doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/home/cc/Documents/GitHub/xilinx_space/bufgmux/src/vlg_design.v" Line 1. Module vlg_design doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.BUFGCTRL(PRESELECT_I0="TRUE")
+Compiling module unisims_ver.INV
+Compiling module unisims_ver.BUFGMUX
+Compiling module xil_defaultlib.vlg_design
+Compiling module xil_defaultlib.testbench_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot testbench_top_behav

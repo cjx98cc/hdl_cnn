@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/cc/Documents/GitHub/xilinx_space/bufgmux/src/vlg_design.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module vlg_design
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/cc/Documents/GitHub/xilinx_space/bufgmux/tb/testbench_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module testbench_top
