@@ -21,7 +21,7 @@ module pe #(
     input  signed [     `DATA_SIZE-1:0] bias,       // bias weight
     output signed [     `DATA_SIZE-1:0] outmap,     // output map: accumulated relu(wx+b)
     output                              outmap_vld, // valid output flag
-    output signed [`HALFWORD_WIDTH-1:0] vldbiased   // wx+b
+    output signed [`HALFWORD_WIDTH-1:0] outraw   // none actiavte and 16bit output ( wx+b )
 );
 
 
@@ -57,13 +57,13 @@ module pe #(
   assign in_vld     = inmap_vld & weight_vld;                                  // when inputs are all valid
   assign sum        = (cnt == 0) ? {bias[7], 5'b0, bias[6:0], 3'b0} : sum_reg; // init of bias should be extended to 16bit, and aligned with Q8.6 of multiplexer
   assign vldproduct = (in_vld == 1'b1) ? product : 16'b0;                      // pass w*x when input is valid
-  assign vldbiased  = (in_vld == 1'b1) ? biased : 16'b0;                       // store vldbiased for output feature map
+  assign outraw  = (in_vld == 1'b1) ? biased : 16'b0;                       // store outraw for output feature map
   assign outmap_vld = cnt == (PERIOD - 1);
 
   // relu activation, bit truncation for radix complement (same operation)
-  assign outmap     = (vldbiased[15]) ? 8'b0 :                                 // if vldbiased < 0 :vladbiased=0;
-                      (vldbiased[2]) ? {vldbiased[15], vldbiased[9:3] + 1'b1} :
-                      {vldbiased[15], vldbiased[9:3]};  // bit truncation
+  assign outmap     = (outraw[15]) ? 8'b0 :                                 // if outraw < 0 :vladbiased=0;
+                      (outraw[2]) ? {outraw[15], outraw[9:3] + 1'b1} :
+                      {outraw[15], outraw[9:3]};  // bit truncation
 
   // counter logic
   always @(posedge rst or posedge clk) begin
@@ -83,7 +83,7 @@ module pe #(
       sum_reg <= 0;
     end else begin
       if (in_vld) begin
-        sum_reg <= vldbiased;
+        sum_reg <= outraw;
         if (cnt == (PERIOD - 1)) begin
           sum_reg <= 0;
         end

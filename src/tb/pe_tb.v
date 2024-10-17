@@ -18,7 +18,7 @@ module pe_tb;
     reg signed [`DATA_SIZE-1:0] bias;       // Bias weight
     wire signed [`DATA_SIZE-1:0] outmap;    // Output map
     wire outmap_vld;                 // Valid output flag
-    wire signed [`HALFWORD_WIDTH-1:0] vldbiased; // wx+b
+    wire signed [`HALFWORD_WIDTH-1:0] outraw; // wx+b
 
     // Instantiate the Device Under Test (DUT)
     pe #(
@@ -33,7 +33,7 @@ module pe_tb;
         .bias(bias),
         .outmap(outmap),
         .outmap_vld(outmap_vld),
-        .vldbiased(vldbiased)
+        .outraw(outraw)
     );
 
     // Clock generation
@@ -51,7 +51,7 @@ module pe_tb;
     // Stimulus generation
     initial begin
 
-        $monitor("Time: %0dns | weight: %0f | bias: %0f | inmap: %0f | outmap: %0f | vldbiased: %0f", $time, weight/8.0, inmap/8.0, bias/8.0, outmap/8.0, vldbiased/64.0);
+        $monitor("Time: %0dns | weight: %0f | bias: %0f | inmap: %0f | outmap: %0f | outraw: %0f", $time, weight/8.0, inmap/8.0, bias/8.0, outmap/8.0, outraw/64.0);
         // Initialize inputs
         weight = 8'b00000000;
         inmap = 8'b00000000;
